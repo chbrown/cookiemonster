@@ -1,0 +1,18 @@
+{
+  "name": "cookiemonster",
+  "version": "0.3.1",
+  "description": "Client-side cookie handling",
+  "keywords": [
+    "cookie",
+    "cookies",
+    "http",
+    "https",
+    "browser",
+    "client"
+  ],
+  "homepage": "https://github.com/chbrown/cookiemonster",
+  "repository": "git://github.com/chbrown/cookiemonster.git",
+  "bugs": "https://github.com/chbrown/cookiemonster/issues",
+  "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
+  "license": "MIT"
+}

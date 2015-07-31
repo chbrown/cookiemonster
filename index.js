@@ -1,11 +1,22 @@
+function defaults(target, source) {
+    for (var key in source) {
+        if (source.hasOwnProperty(key) && target[key] === undefined) {
+            target[key] = source[key];
+        }
+    }
+}
 var CookieMonster = (function () {
     /**
-    Generally, this should be called like `new CookieMonster(document.cookie)`,
+    Generally, this should be called like `new CookieMonster(document)`,
     where `document` is a DOM Document instance.
+  
+    If a second argument is given, any CookieMonster#set(...) calls will have its
+    options merged with the defaultOptions argument.
     */
-    function CookieMonster(document) {
+    function CookieMonster(document, defaultOptions) {
         if (document === void 0) { document = { cookie: '' }; }
         this.document = document;
+        this.defaultOptions = defaultOptions;
         this.cookie_strings = document.cookie.split(/\s*;\s*/);
     }
     /**
@@ -28,6 +39,7 @@ var CookieMonster = (function () {
     CookieMonster.prototype.set = function (name, value, options) {
         if (options === void 0) { options = {}; }
         var pairs = [[encodeURIComponent(name), encodeURIComponent(value)]];
+        defaults(options, this.defaultOptions);
         if (options.expires !== undefined) {
             if (options.expires instanceof Date) {
                 pairs.push(['expires', options.expires.toUTCString()]);

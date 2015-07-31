@@ -10,14 +10,26 @@ export interface Cookie extends CookieOptions {
   value: string;
 }
 
+function defaults(target, source) {
+  for (var key in source) {
+    if (source.hasOwnProperty(key) && target[key] === undefined) {
+      target[key] = source[key];
+    }
+  }
+}
+
 export class CookieMonster {
   private cookie_strings: string[];
 
   /**
-  Generally, this should be called like `new CookieMonster(document.cookie)`,
+  Generally, this should be called like `new CookieMonster(document)`,
   where `document` is a DOM Document instance.
+
+  If a second argument is given, any CookieMonster#set(...) calls will have its
+  options merged with the defaultOptions argument.
   */
-  constructor(private document: {cookie: string} = {cookie: ''}) {
+  constructor(private document: {cookie: string} = {cookie: ''},
+              private defaultOptions?: CookieOptions) {
     this.cookie_strings = document.cookie.split(/\s*;\s*/);
   }
 
@@ -41,6 +53,7 @@ export class CookieMonster {
   */
   set(name: string, value: string, options: CookieOptions = {}) {
     var pairs: Array<[string, string] | [string]> = [[encodeURIComponent(name), encodeURIComponent(value)]];
+    defaults(options, this.defaultOptions);
     if (options.expires !== undefined) {
       if (options.expires instanceof Date) {
         pairs.push(['expires', options.expires.toUTCString()]);

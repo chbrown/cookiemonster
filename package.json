@@ -1,7 +1,7 @@
 {
   "name": "cookiemonster",
-  "version": "1.0.1",
   "description": "Client-side cookie handling",
+  "version": "1.0.1",
   "keywords": [
     "cookie",
     "cookies",
@@ -11,8 +11,14 @@
     "client"
   ],
   "homepage": "https://github.com/chbrown/cookiemonster",
-  "repository": "git://github.com/chbrown/cookiemonster.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chbrown/cookiemonster.git"
+  },
   "bugs": "https://github.com/chbrown/cookiemonster/issues",
   "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "*"
+  }
 }
